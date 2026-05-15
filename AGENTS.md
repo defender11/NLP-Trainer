@@ -90,9 +90,10 @@ UI не управляет бизнес-логикой напрямую.
 - Перед началом задачи агент всегда учитывает `AGENTS.md`.
 - Если изменились `.md` файлы, агент перечитывает только измененные файлы перед правками кода.
 - Для проверки изменений использовать `git status` и `git diff --name-only -- '*.md'`.
-- Если пользователь явно указал файл (`README.md`, `md-docs/ROADMAP.md`, `ARCHITECTURE.md`), агент обязан свериться с ним перед выполнением.
+- Если пользователь явно указал файл (`README.md`, `IMPLEMENTATION_PLAN.md`, `md-docs/WEBSOCKET_ROADMAP.md`, `ARCHITECTURE.md`), агент обязан свериться с ним перед выполнением.
 - Пользовательские markdown-файлы хранить в папке [md-docs/user-md](./md-docs/user-md/).
 - Если существует `md-docs/user-md/USER_GIT_ALIASES.md`, агент может использовать и цитировать алиасы из него при git-командах.
+- Новые `.md` файлы, связанные с `AGENTS.md`, именовать в `UPPERCASE` (пример: `IMPLEMENTATION_PLAN.md`, `RUNBOOK.md`).
 
 ---
 
@@ -105,7 +106,7 @@ UI не управляет бизнес-логикой напрямую.
 3. `ARCHITECTURE.md` - границы модулей, контракты, поток данных.
 4. `CONTRIBUTING.md` - правила PR, коммитов, веток и ревью.
 5. `RUNBOOK.md` - действия при инцидентах, деградации и восстановлении.
-6. `md-docs/ROADMAP.md` - будущие фичи, этапы и технические направления.
+6. `md-docs/WEBSOCKET_ROADMAP.md` - roadmap по WebSocket, sync и telemetry.
 
 Дополнительные полезные `.md`:
 
@@ -129,8 +130,9 @@ focus-trainer/
 ├── index.html
 ├── README.md (optional)
 ├── AGENTS.md
+├── IMPLEMENTATION_PLAN.md
 ├── md-docs/
-│   ├── ROADMAP.md
+│   ├── WEBSOCKET_ROADMAP.md
 │   └── user-md/
 │       └── USER_GIT_ALIASES.md (optional)
 ├── public/
@@ -337,7 +339,7 @@ WebSocket layer.
 
 Приложение должно полностью работать оффлайн без `ws.js`.
 
-Долгосрочные WS-идеи вынесены в [md-docs/ROADMAP.md](./md-docs/ROADMAP.md).
+Долгосрочные WS-идеи вынесены в [md-docs/WEBSOCKET_ROADMAP.md](./md-docs/WEBSOCKET_ROADMAP.md).
 
 ---
 
