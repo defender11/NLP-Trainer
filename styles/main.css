@@ -1,0 +1,136 @@
+:root {
+  color-scheme: light;
+  font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.app {
+  width: min(720px, 92vw);
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+header {
+  display: grid;
+  gap: 8px;
+}
+
+.modes {
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.modeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modeButton {
+  border: 1px solid #9ca3af;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.modeButton[aria-pressed='true'] {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.step {
+  margin-top: 20px;
+  min-height: 100px;
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f9fafb;
+}
+
+.stepExtra {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.timerStatus {
+  font-size: 13px;
+  color: #1d4ed8;
+}
+
+.taskSection {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.taskLabel {
+  font-size: 14px;
+  color: #374151;
+}
+
+.taskInput {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.validationText {
+  font-size: 13px;
+  color: #b91c1c;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+button {
+  border: 1px solid #9ca3af;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #ffffff;
+  font: inherit;
+}
+
+button:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}

@@ -9,9 +9,18 @@
 - `[ ]` не начато
 - `[x]` выполнено
 
+## Этап 0 (Build & Infra)
+
+- [ ] Webpack build: настроить сборку через Webpack.
+- [ ] Single-file output: после `npm run build` на выходе должен быть один HTML-файл.
+- [ ] Inline assets: внутри итогового HTML должны быть встроены `js + css + img` (base64/Unicode).
+- [ ] NPM scripts: добавить скрипты сборки (`build`) и связанные команды для production-сборки.
+- [ ] Webpack server: добавить локальный сервер через Webpack для разработки и проверки (`dev`/`serve`).
+- [x] Refactor prep: разобрать эталонный `focus-trainer.html` на модульную структуру (`src/*`), чтобы подготовить кодовую базу к удобной webpack-сборке. (Выполнено: вынесены flow/state-модули, добавлены `flow-registry` и `step-descriptor`, `app/trainer/ui` переведены на runtime режимов/шагов, таймерные сценарии вынесены в `timers.js` с event-routing, добавлены модули прогресса/истории, карта декомпозиции — `md-docs/REFRACTOR_WEBPACK_BREAKDOWN.md`)
+
 ## Этап 1 (Highest priority)
 
-- [ ] Stability: устранить известные крэши/зависания и закрыть критичные deadlock-сценарии в тренировочном flow.
+- [ ] Stability: устранить известные крэши/зависания и закрыть критичные deadlock-сценарии в тренировочном flow. (Отложено: приоритет временно смещен на разбор эталонного `focus-trainer.html` под webpack-подготовку)
 - [ ] Offline support: проверить и стабилизировать полноценную работу оффлайн после первого install (без backend и без auth).
 - [ ] Blind navigation: довести управление с клавиатуры (`Space`, `Enter`, `ArrowRight`, `N`, `Т`, `S`, `Ы`) без конфликтов с `input/textarea/select/contenteditable`.
 - [ ] Mobile UX: проверить и улучшить UX на iPhone Safari и Android Chrome с приоритетом на быстрый запуск и простой контроль сессии.

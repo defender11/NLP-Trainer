@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Trainer</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header>
+        <h1>Focus Trainer</h1>
+        <p id="statusText">Готово к запуску</p>
+      </header>
+
+      <section class="modes">
+        <h2 class="sectionTitle">Режим</h2>
+        <div id="modeList" class="modeList"></div>
+      </section>
+
+      <section class="step" aria-live="polite">
+        <h2 id="stepTitle">Шаг не запущен</h2>
+        <p id="stepHint">Нажмите Start или Space/Enter</p>
+        <p id="stepExtra" class="stepExtra"></p>
+        <p id="timerStatus" class="timerStatus"></p>
+      </section>
+
+      <section id="taskSection" class="taskSection hidden">
+        <label for="taskInput" class="taskLabel">Задача на фокус</label>
+        <textarea
+          id="taskInput"
+          class="taskInput"
+          rows="3"
+          placeholder="Например: починить фильтр evlsprt в other.xml"
+        ></textarea>
+        <p id="validationText" class="validationText"></p>
+      </section>
+
+      <section class="controls">
+        <button id="startButton" type="button">Start</button>
+        <button id="nextButton" type="button">Next</button>
+        <button id="skipButton" type="button" class="hidden">Skip Timer</button>
+        <button id="voiceButton" type="button" aria-pressed="true">Voice: On</button>
+      </section>
+    </main>
+
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
