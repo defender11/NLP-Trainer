@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Фокус">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0f1014">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f1014'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%235DCAA5'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230f1014'/%3E%3Ccircle cx='90' cy='90' r='32' fill='%235DCAA5'/%3E%3C/svg%3E">
+<title>Тренажёр фокуса — НЛП якорь</title>
+<style>
+:root {
+  --bg: #0f1014;
+  --bg-card: #1a1c22;
+  --bg-card-2: #22252d;
+  --bg-input: #14161b;
+  --txt: #e8e6df;
+  --txt-2: #a8a59c;
+  --txt-3: #6f6d65;
+  --border: #2c2f38;
+  --border-2: #3a3e48;
+
+  --teal: #5DCAA5;
+  --teal-bg: rgba(93, 202, 165, 0.12);
+  --teal-dark: #0F6E56;
+
+  --purple: #AFA9EC;
+  --purple-bg: rgba(175, 169, 236, 0.12);
+  --purple-dark: #534AB7;
+
+  --amber: #EF9F27;
+  --amber-bg: rgba(239, 159, 39, 0.12);
+  --amber-dark: #854F0B;
+
+  --coral: #F0997B;
+  --coral-bg: rgba(240, 153, 123, 0.12);
+  --coral-dark: #993C1D;
+
+  --red: #E24B4A;
+  --red-bg: rgba(226, 75, 74, 0.12);
+
+  --green: #97C459;
+  --green-bg: rgba(151, 196, 89, 0.12);
+
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "SF Pro Text", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+body {
+  padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1.5rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  display: flex;
+  justify-content: center;
+}
+
+button, a, .btn-mode, .icon-btn, .fb {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.container {
+  width: 100%;
+  max-width: 680px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--txt);
+  letter-spacing: 0.02em;
+}
+
+.app-header .logo-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.menu-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--txt-2);
+  transition: background 0.15s, color 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.icon-btn:hover {
+  background: var(--bg-card-2);
+  color: var(--txt);
+}
+
+.icon-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.h1 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--txt);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--txt);
+  margin-bottom: 6px;
+}
+
+.txt {
+  font-size: 14px;
+  color: var(--txt-2);
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tag-i { background: var(--purple-bg); color: var(--purple); }
+.tag-s { background: var(--teal-bg); color: var(--teal); }
+.tag-w { background: var(--amber-bg); color: var(--amber); }
+.tag-d { background: var(--red-bg); color: var(--red); }
+
+.brain {
+  font-size: 13px;
+  color: var(--purple);
+  background: var(--purple-bg);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-top: 12px;
+  line-height: 1.6;
+  border-left: 2px solid var(--purple);
+}
+
+.warn {
+  font-size: 13px;
+  color: var(--amber);
+  background: var(--amber-bg);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-top: 12px;
+  line-height: 1.6;
+  border-left: 2px solid var(--amber);
+}
+
+.school {
+  font-size: 13px;
+  background: var(--bg-card-2);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  margin-top: 12px;
+  line-height: 1.6;
+  color: var(--txt);
+}
+
+.school strong {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.btn {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  background: var(--teal);
+  color: #0a0e0c;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: opacity 0.15s, transform 0.05s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  min-height: 50px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.btn:hover { opacity: 0.85; }
+.btn:active { transform: scale(0.99); }
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: var(--bg-card-2);
+  color: var(--txt-3);
+}
+
+.btn-2 {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: var(--txt-2);
+  background: transparent;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  min-height: 44px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.btn-2:hover {
+  background: var(--bg-card-2);
+  color: var(--txt);
+}
+
+.btn-mode {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: background 0.15s, border-color 0.15s, transform 0.05s;
+  font-family: inherit;
+  color: var(--txt);
+}
+
+.btn-mode:hover {
+  background: var(--bg-card-2);
+  border-color: var(--border-2);
+}
+
+.btn-mode:active { transform: scale(0.998); }
+
+.btn-mode-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--txt);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-mode-time {
+  color: var(--txt-3);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.btn-mode-sub {
+  font-size: 13px;
+  color: var(--txt-2);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  background: var(--bg-card-2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.stat-v {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--txt);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.stat-l {
+  font-size: 11px;
+  color: var(--txt-3);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timer-big {
+  font-size: 56px;
+  font-weight: 300;
+  color: var(--txt);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.timer-lbl {
+  font-size: 13px;
+  color: var(--txt-3);
+  text-align: center;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tbar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.tbar-fill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 2px;
+  transition: width 0.5s linear;
+  width: 0%;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+
+.dot.done { background: var(--teal); }
+.dot.active { background: var(--txt); transform: scale(1.4); }
+
+.prog {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 2px;
+  transition: width 0.4s;
+  width: 0%;
+}
+
+.anchor-zone {
+  text-align: center;
+  padding: 1.75rem 1rem;
+  background: var(--bg-card-2);
+  border-radius: var(--radius-lg);
+  margin: 1rem 0;
+  border: 0.5px solid var(--border);
+}
+
+.anchor-w {
+  font-size: 38px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  color: var(--teal);
+}
+
+.anchor-w.exit { color: var(--red); }
+
+.anchor-g {
+  font-size: 14px;
+  color: var(--txt-2);
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chk {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--txt-2);
+  line-height: 1.5;
+}
+
+.chk-icon {
+  color: var(--teal);
+  font-size: 14px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.peak {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  justify-content: center;
+  height: 50px;
+  margin: 1rem 0;
+}
+
+.peak-b {
+  width: 14px;
+  border-radius: 3px 3px 0 0;
+  background: var(--border);
+  transition: height 0.15s, background 0.15s;
+}
+
+.glow { animation: pulse 1.4s ease-in-out infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.task-show {
+  font-size: 15px;
+  color: var(--txt);
+  background: var(--bg-card-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 12px 16px;
+  margin: 1rem 0;
+  border-left: 3px solid var(--teal);
+  line-height: 1.5;
+}
+
+.task-show strong {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-input);
+  color: var(--txt);
+  font-family: inherit;
+  line-height: 1.6;
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+
+.test-btn {
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  background: var(--amber-bg);
+  color: var(--amber);
+  border: 0.5px solid var(--amber);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.75rem;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.test-btn:hover { background: rgba(239, 159, 39, 0.2); }
+
+.feedback {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.fb {
+  flex: 1;
+  padding: 14px 8px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--txt-2);
+  font-family: inherit;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.fb:hover { background: var(--bg-card-2); }
+.fb.strong { border-color: var(--teal); color: var(--teal); }
+.fb.weak { border-color: var(--amber); color: var(--amber); }
+.fb.none { border-color: var(--red); color: var(--red); }
+
+.streak-fire {
+  color: var(--amber);
+  font-size: 16px;
+  margin-left: 4px;
+}
+
+.history-section {
+  margin-top: 1.5rem;
+}
+
+.history-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--bg-card-2);
+  border-radius: var(--radius-md);
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.history-date {
+  color: var(--txt-3);
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.history-mode {
+  color: var(--txt);
+}
+
+.history-mark {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.history-mark.install { background: var(--purple-bg); color: var(--purple); }
+.history-mark.full { background: var(--teal-bg); color: var(--teal); }
+.history-mark.quick { background: var(--amber-bg); color: var(--amber); }
+
+.empty {
+  text-align: center;
+  color: var(--txt-3);
+  padding: 2rem 1rem;
+  font-size: 14px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bg-card);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  max-width: 480px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-h {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--txt);
+}
+
+.hidden { display: none !important; }
+
+.toast {
+  position: fixed;
+  bottom: max(24px, calc(env(safe-area-inset-bottom) + 16px));
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 0.5px solid var(--teal);
+  color: var(--teal);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  z-index: 200;
+  animation: toastIn 0.3s ease-out;
+  max-width: calc(100vw - 2rem);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 4px;
+  margin: 1rem 0;
+}
+
+.hm-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.hm-cell.l1 { background: var(--teal-dark); opacity: 0.5; }
+.hm-cell.l2 { background: var(--teal-dark); opacity: 0.8; }
+.hm-cell.l3 { background: var(--teal); }
+.hm-cell.today { box-shadow: 0 0 0 1.5px var(--txt); }
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 80px;
+  margin: 1rem 0;
+}
+
+.bar {
+  flex: 1;
+  background: var(--teal);
+  border-radius: 3px 3px 0 0;
+  min-height: 4px;
+  position: relative;
+  transition: opacity 0.2s;
+}
+
+.bar:hover { opacity: 0.8; }
+
+.bar-label {
+  text-align: center;
+  font-size: 10px;
+  color: var(--txt-3);
+  margin-top: 6px;
+}
+
+.bars-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.section-title {
+  font-size: 13px;
+  color: var(--txt-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  margin-top: 1.5rem;
+}
+
+input[type="file"] { display: none; }
+
+.divider {
+  height: 0.5px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+.voice-status {
+  font-size: 12px;
+  color: var(--txt-3);
+  text-align: center;
+  margin-top: 8px;
+  min-height: 18px;
+}
+
+.btn.voice-wait {
+  background: var(--bg-card-2);
+  color: var(--txt-2);
+}
+
+.btn.voice-ready {
+  background: var(--teal);
+  color: #0a0e0c;
+}
+
+@media (max-width: 480px) {
+  body { padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem max(1rem, env(safe-area-inset-bottom)) 0.75rem; }
+  .card { padding: 1rem 1.1rem; }
+  .h1 { font-size: 18px; }
+  .timer-big { font-size: 44px; }
+  .anchor-w { font-size: 32px; }
+  .stat-v { font-size: 20px; }
+  .heatmap { grid-template-columns: repeat(10, 1fr); }
+  .app-header h1 { font-size: 16px; }
+  .icon-btn { width: 40px; height: 40px; }
+  .menu-btns { gap: 4px; }
+  .btn-mode { padding: 0.875rem 1rem; }
+  .btn-mode-title { font-size: 14px; }
+  .btn-mode-sub { font-size: 12px; }
+}
+
+@media (display-mode: standalone) {
+  body { padding-top: max(1rem, env(safe-area-inset-top)); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="app-header">
+  <h1><span class="logo-dot"></span>Тренажёр фокуса</h1>
+  <div class="menu-btns">
+    <button class="icon-btn" onclick="toggleVoice()" id="voice-toggle" title="Голос выключен" aria-label="Включить голосовое сопровождение">
+      <svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
+    <button class="icon-btn" onclick="showStats()" title="Статистика">
+      <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
+    </button>
+    <button class="icon-btn" onclick="exportData()" title="Скачать данные">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </button>
+    <button class="icon-btn" onclick="document.getElementById('import-file').click()" title="Загрузить данные">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    </button>
+    <button class="icon-btn" onclick="showHelp()" title="Помощь и инструкция">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </button>
+    <input type="file" id="import-file" accept=".json" onchange="importData(event)">
+  </div>
+</div>
+
+<div id="screen-home">
+  <div class="card">
+    <div class="h1">Привет</div>
+    <div class="txt" style="margin-bottom:1rem">Выбери режим. Прогресс сохраняется автоматически.</div>
+    <div id="ios-banner" class="hidden" style="background:var(--purple-bg);border-radius:var(--radius-md);padding:10px 14px;margin-bottom:1rem;font-size:13px;color:var(--purple);border-left:2px solid var(--purple);line-height:1.5">
+      Совет для iPhone: добавь файл на главный экран — будет работать как обычное приложение. <a href="#" onclick="showHelp();return false" style="color:var(--purple);text-decoration:underline">Как это сделать</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v" id="streak-val">0</div><div class="stat-l">Стрик</div></div>
+      <div class="stat"><div class="stat-v" id="total-val">0</div><div class="stat-l">Сессий</div></div>
+      <div class="stat"><div class="stat-v" id="anchor-val">—</div><div class="stat-l">Якорь</div></div>
+    </div>
+    <button class="btn-mode" onclick="startMode('install')">
+      <div class="btn-mode-title">1. Установить якорь <span class="btn-mode-time">~7 мин</span></div>
+      <div class="btn-mode-sub">Первый раз или подкормить старый. «Фокус» + сжатие пальцев. Также якорь выхода «Стоп».</div>
+    </button>
+    <button class="btn-mode" onclick="startMode('full')">
+      <div class="btn-mode-title">2. Полный протокол <span class="btn-mode-time">~10 мин</span></div>
+      <div class="btn-mode-sub">Перед сложной работой. Дыхание + движение + цель + якорь + Pomodoro 25 мин.</div>
+    </button>
+    <button class="btn-mode" onclick="startMode('quick')">
+      <div class="btn-mode-title">3. Быстрый запуск <span class="btn-mode-time">~90 сек</span></div>
+      <div class="btn-mode-sub">Когда времени нет. Дыхание 30 сек + цель + якорь.</div>
+    </button>
+  </div>
+</div>
+
+<div id="screen-help" class="hidden">
+  <div class="card">
+    <div class="h1">Как пользоваться на iPhone</div>
+    <div class="txt" style="margin-top:8px">Когда тапаешь HTML-файл в Files, iOS открывает его в режиме предпросмотра — JavaScript отключён, тренажёр не работает. Это политика Apple, обойти нельзя. Но открыть в Safari можно.</div>
+
+    <div class="section-title">Способ 1 — открыть в Safari</div>
+    <div class="checklist">
+      <div class="chk"><span class="chk-icon">1</span>В Files найди файл в iCloud Drive</div>
+      <div class="chk"><span class="chk-icon">2</span>Долгий тап на файле</div>
+      <div class="chk"><span class="chk-icon">3</span>В меню выбери «Поделиться»</div>
+      <div class="chk"><span class="chk-icon">4</span>Найди иконку Safari (или нажми «Ещё»)</div>
+      <div class="chk"><span class="chk-icon">5</span>Файл откроется в Safari — теперь работает</div>
+    </div>
+
+    <div class="section-title">Способ 2 — добавить на главный экран</div>
+    <div class="txt">После открытия в Safari (Способ 1):</div>
+    <div class="checklist" style="margin-top:8px">
+      <div class="chk"><span class="chk-icon">1</span>Тапни кнопку «Поделиться» снизу</div>
+      <div class="chk"><span class="chk-icon">2</span>Выбери «На экран Домой»</div>
+      <div class="chk"><span class="chk-icon">3</span>Появится иконка как у обычного приложения</div>
+    </div>
+    <div class="school" style="margin-top:12px">Это лучший вариант: при запуске с главного экрана тренажёр работает без браузерной шапки и адресной строки. Выглядит как настоящее приложение.</div>
+
+    <div class="section-title">Про данные между Mac и iPhone</div>
+    <div class="txt">Прогресс хранится <strong>в браузере</strong> отдельно для каждого устройства. iCloud синхронизирует только сам файл, не данные внутри. Чтобы перенести стрик и историю с Mac на iPhone:</div>
+    <div class="checklist" style="margin-top:8px">
+      <div class="chk"><span class="chk-icon">1</span>На Mac тапни иконку ⬇ в шапке — скачается JSON</div>
+      <div class="chk"><span class="chk-icon">2</span>Положи JSON в iCloud Drive</div>
+      <div class="chk"><span class="chk-icon">3</span>На iPhone тапни иконку ⬆ — выбери файл</div>
+    </div>
+
+    <div class="warn" style="margin-top:1rem"><strong>Важно про экран:</strong> iOS гасит экран после ~30 сек бездействия. Если читаешь длинное объяснение — тапни в любое место, чтобы не погас. Во время таймеров экран остаётся активным.</div>
+
+    <button class="btn" onclick="goHome()" style="margin-top:1rem">Понял, на главный</button>
+  </div>
+</div>
+
+<div id="screen-step" class="hidden">
+  <div class="prog"><div class="prog-fill" id="prog"></div></div>
+  <div class="dots" id="dots"></div>
+  <div id="step-body"></div>
+  <button class="btn" id="btn-next" onclick="nextStep()">Далее →</button>
+  <div class="voice-status" id="voice-status"></div>
+  <button class="btn-2" id="btn-skip" onclick="skipTimer()" style="display:none">Пропустить таймер</button>
+  <button class="btn-2" onclick="abort()" style="margin-top:4px">Прервать и вернуться</button>
+</div>
+
+<div id="screen-test" class="hidden">
+  <div class="card">
+    <span class="tag tag-w">Проверка</span>
+    <div class="h1">Сейчас протестируем якорь</div>
+    <div class="txt" style="margin-top:8px">Сначала разорви состояние — встряхни руками, подумай о завтраке. Потом нажми кнопку и активируй якорь: «Фокус» + сжать пальцы.</div>
+    <div class="school">Это <strong>важный шаг</strong>. Если якорь не сработал — лучше пройти установку ещё раз сейчас, чем работать со слабым якорем.</div>
+    <button class="test-btn" onclick="testAnchor()">⚡ Активировать якорь сейчас</button>
+    <div id="test-result" class="hidden">
+      <div class="h2" style="margin-top:1.5rem">Что почувствовал?</div>
+      <div class="feedback">
+        <button class="fb strong" onclick="finishTest('strong')">😊<span>Сильно</span></button>
+        <button class="fb weak" onclick="finishTest('weak')">😐<span>Слабо</span></button>
+        <button class="fb none" onclick="finishTest('none')">✕<span>Никак</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-pomodoro" class="hidden">
+  <div class="card">
+    <span class="tag tag-i">Pomodoro 25 мин</span>
+    <div class="h1">Время работать</div>
+    <div id="task-display" class="task-show"></div>
+    <div style="margin:1.5rem 0">
+      <div class="timer-big" id="pom-num">25:00</div>
+      <div class="timer-lbl">До перерыва</div>
+      <div class="tbar"><div class="tbar-fill" id="pom-bar"></div></div>
+    </div>
+    <button class="btn" id="pom-btn" onclick="togglePom()">▶ Запустить</button>
+    <button class="btn-2" onclick="endPomodoro()">Закончить раньше</button>
+  </div>
+</div>
+
+<div id="screen-exit" class="hidden">
+  <div class="card">
+    <span class="tag tag-d">Якорь выхода</span>
+    <div class="h1">Выйди из состояния</div>
+    <div class="txt" style="margin-top:8px">Закончил работу — нужно правильно выйти из режима фокуса, иначе мозг продолжит «гудеть» вхолостую.</div>
+    <div class="school"><strong>Зачем выход:</strong> состояние фокуса — это повышенный расход «топлива» (кортизол, норадреналин). Если не выходить — усталость накопится быстрее, а сам якорь со временем ослабнет.</div>
+    <div class="anchor-zone glow" style="margin-top:1rem">
+      <div class="anchor-w exit">СТОП</div>
+      <div class="anchor-g">Глубокий выдох + разожми пальцы веером</div>
+    </div>
+    <div class="timer-big" id="exit-num" style="margin-top:1rem">5</div>
+    <div class="timer-lbl">секунд</div>
+    <div class="tbar"><div class="tbar-fill" id="exit-bar"></div></div>
+    <button class="btn" id="exit-btn" onclick="finishExit()" disabled>Готово</button>
+  </div>
+</div>
+
+<div id="screen-done" class="hidden">
+  <div class="card">
+    <div style="text-align:center;margin:1rem 0;font-size:48px;color:var(--teal)">✓</div>
+    <div class="h1" style="text-align:center">Сессия завершена</div>
+    <div class="txt" style="text-align:center;margin-top:8px" id="done-msg">Прогресс сохранён.</div>
+    <div class="stats" style="margin-top:1.5rem">
+      <div class="stat"><div class="stat-v" id="d-streak">0</div><div class="stat-l">Стрик</div></div>
+      <div class="stat"><div class="stat-v" id="d-total">0</div><div class="stat-l">Всего</div></div>
+      <div class="stat"><div class="stat-v" id="d-mode">—</div><div class="stat-l">Режим</div></div>
+    </div>
+    <div class="brain" id="next-tip"></div>
+    <button class="btn" onclick="goHome()">На главный экран</button>
+  </div>
+</div>
+
+<div id="screen-stats" class="hidden">
+  <div class="card">
+    <div class="h1">Статистика</div>
+
+    <div class="stats" style="margin-top:1rem">
+      <div class="stat"><div class="stat-v" id="s-streak">0</div><div class="stat-l">Стрик</div></div>
+      <div class="stat"><div class="stat-v" id="s-best">0</div><div class="stat-l">Рекорд</div></div>
+      <div class="stat"><div class="stat-v" id="s-total">0</div><div class="stat-l">Всего</div></div>
+    </div>
+
+    <div class="section-title">Активность за 14 недель</div>
+    <div class="heatmap" id="heatmap"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--txt-3);margin-top:6px">
+      <span>Меньше</span>
+      <div style="display:flex;gap:3px">
+        <span style="width:11px;height:11px;background:var(--border);border-radius:2px"></span>
+        <span style="width:11px;height:11px;background:var(--teal-dark);opacity:0.5;border-radius:2px"></span>
+        <span style="width:11px;height:11px;background:var(--teal-dark);opacity:0.8;border-radius:2px"></span>
+        <span style="width:11px;height:11px;background:var(--teal);border-radius:2px"></span>
+      </div>
+      <span>Больше</span>
+    </div>
+
+    <div class="section-title">По режимам</div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v" id="s-install">0</div><div class="stat-l">Установок</div></div>
+      <div class="stat"><div class="stat-v" id="s-full">0</div><div class="stat-l">Полных</div></div>
+      <div class="stat"><div class="stat-v" id="s-quick">0</div><div class="stat-l">Быстрых</div></div>
+    </div>
+
+    <div class="section-title">История (последние 10)</div>
+    <div id="history-list"></div>
+
+    <div class="divider"></div>
+
+    <button class="btn-2" onclick="exportData()">⬇ Скачать данные (JSON)</button>
+    <button class="btn-2" onclick="document.getElementById('import-file').click()">⬆ Загрузить данные</button>
+    <button class="btn-2" onclick="resetAll()" style="color:var(--red);border-color:var(--red)">🗑 Сбросить всё</button>
+    <button class="btn" onclick="goHome()" style="margin-top:1rem">← Назад</button>
+  </div>
+</div>
+
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const STORAGE_KEY = 'focus_trainer_data_v2';
+
+let state = {
+  streak: 0,
+  bestStreak: 0,
+  total: 0,
+  lastDate: null,
+  anchorInstalled: false,
+  anchorStrength: 'unknown',
+  lastTask: '',
+  history: [],
+  modeCount: { install: 0, full: 0, quick: 0 }
+};
+
+let mode = '';
+let stepIdx = 0;
+let stepFlow = [];
+let timerInt = null;
+let timerLeft = 0;
+let timerMax = 1;
+let breathInt = null;
+let peakInt = null;
+let pomInt = null;
+let pomLeft = 25 * 60;
+let pomRunning = false;
+let pomMax = 25 * 60;
+
+const installFlow = [
+  { tag: 'tag-i', tagText: 'Подготовка', title: 'Что мы сейчас сделаем',
+    desc: 'Запишем твоё состояние продуктивности в жест. Чтобы потом одним движением включать собранность.',
+    school: 'Это работает как <strong>условный рефлекс</strong>. Помнишь — у Павлова собака слышала звонок и у неё текла слюна? Мы делаем то же. Слово «Фокус» + сжатие пальцев = твой мозг включает режим работы.',
+    voice: 'Сейчас мы запишем твоё состояние продуктивности в жест. Три раунда, пять шагов каждый. Включи голос — и можешь закрывать глаза на нужных шагах. Нажми «Понял, поехали».',
+    btn: 'Понял, поехали' },
+  { tag: 'tag-s', tagText: 'Раунд 1 из 3 · Шаг 1', title: 'Вспомни момент потока',
+    desc: 'Закрой глаза. Вспомни конкретный случай — ты сидел за кодом, всё шло легко, ты понимал каждую строчку. Где ты был? Что было на экране? Какой звук стоял в комнате?',
+    school: 'Не «вспомни» <strong>как фильм со стороны</strong> — войди внутрь. Смотри на монитор глазами того себя. Это критично — мозг тогда поверит что ты там.',
+    voice: 'Закрой глаза. Вспомни конкретный момент — ты сидел за кодом, всё шло легко, понимал каждую строчку. Где ты был? Что было на экране? Смотри на тот экран своими глазами — изнутри, не со стороны. Я дам тебе двадцать секунд.',
+    autoNext: 20,
+    btn: 'Я внутри воспоминания' },
+  { tag: 'tag-s', tagText: 'Раунд 1 из 3 · Шаг 2', title: 'Усиль картинку',
+    desc: 'Ты внутри воспоминания. Крути три ручки: картинку — крупнее и ближе. Звуки — чуть громче. Ощущение собранности — усиль специально. Всё это в воображении, руками ничего не делай.',
+    school: 'Мозг <strong>не отличает</strong> яркое воспоминание от настоящего. Когда картинка яркая — у тебя выделяются те же гормоны что и в реальной работе. Мы это и ловим.',
+    voice: 'Глаза закрыты. Теперь усиливай. Картинку — сделай крупнее и ближе. Звуки — клавиатура, музыка — чуть громче. Ощущение собранности в теле — почувствуй как оно нарастает. Пятнадцать секунд.',
+    autoNext: 15,
+    btn: 'Картинка яркая' },
+  { tag: 'tag-w', tagText: 'Раунд 1 из 3 · Шаг 3', title: 'Жди пика',
+    desc: 'Удерживай ощущение. Смотри на шкалу — она задаёт ритм. Как только почувствуешь максимум — нажимай кнопку.',
+    school: 'Якорь нужно ставить <strong>на пике</strong>, а не после. Если поставишь когда уже спадает — заякоришь спад.',
+    voice: 'Удерживай ощущение фокуса. Оно нарастает как волна. Как только почувствуешь максимум — нажми кнопку «Чувствую пик».',
+    type: 'peak', sec: 12, btn: 'Чувствую пик' },
+  { tag: 'tag-d', tagText: 'Раунд 1 из 3 · Шаг 4', title: 'Якорь — прямо сейчас!',
+    desc: 'Скажи: ФОКУС. Сожми большой и указательный. Держи 7 секунд, не отпускай.',
+    school: 'Эти 7 секунд — мозг физически прокладывает <strong>новую нейронную связь</strong> между состоянием и жестом.',
+    voice: 'Скажи вслух: Фокус. Сожми большой и указательный пальцы прямо сейчас. Держи семь секунд. Не отпускай.',
+    type: 'anchor', sec: 7, btn: 'Отпустил' },
+  { tag: 'tag-i', tagText: 'Раунд 1 из 3 · Шаг 5', title: 'Разорви состояние',
+    desc: 'Встань если сидишь. Потряси руками. Подумай о завтраке. О том сколько у тебя бензина в Lanos.',
+    school: '<strong>Обязательный шаг!</strong> Если не разорвать — следующий раунд запишется поверх и испортит якорь.',
+    voice: 'Открой глаза. Встань, потряси руками. Подумай о чём-нибудь обычном — что ел на завтрак, сколько бензина в Lanos. Пять секунд — обнуляемся.',
+    type: 'timer', sec: 5, btn: 'Сброшено' },
+  { tag: 'tag-s', tagText: 'Раунд 2 из 3 · Шаг 1', title: 'Новое воспоминание',
+    desc: 'Вспомни ДРУГОЙ момент продуктивности. Не тот же что в первый раз. Например — когда быстро разобрал чужой код или починил баг за 5 минут.',
+    school: 'Чем больше <strong>разных</strong> воспоминаний под одним якорем — тем он мощнее. Это как сваривать металл в несколько проходов.',
+    voice: 'Закрой глаза. Другое воспоминание — не то же самое. Например когда быстро починил баг, или разобрал чужой код. Войди внутрь — смотри своими глазами. Двадцать секунд.',
+    autoNext: 20,
+    btn: 'Вспомнил, я внутри' },
+  { tag: 'tag-s', tagText: 'Раунд 2 из 3 · Шаг 2', title: 'Усиль картинку',
+    desc: 'Снова крути ручки: ярче, громче, ощущение сильнее. Доведи до максимума.',
+    voice: 'Глаза закрыты. Усиливай — ярче, громче, ощущение в теле сильнее. Пятнадцать секунд.',
+    autoNext: 15,
+    btn: 'Максимум есть' },
+  { tag: 'tag-w', tagText: 'Раунд 2 из 3 · Шаг 3', title: 'Жди пика',
+    desc: 'Удерживай. Как только почувствуешь максимум — нажимай.',
+    voice: 'Удерживай ощущение. Жди пика — нажми кнопку когда почувствуешь максимум.',
+    type: 'peak', sec: 12, btn: 'Чувствую пик' },
+  { tag: 'tag-d', tagText: 'Раунд 2 из 3 · Шаг 4', title: 'Якорь!',
+    desc: 'ФОКУС + сжать пальцы. 7 секунд держать.',
+    voice: 'Фокус. Сожми пальцы. Семь секунд держи.',
+    type: 'anchor', sec: 7, btn: 'Отпустил' },
+  { tag: 'tag-i', tagText: 'Раунд 2 из 3 · Шаг 5', title: 'Разорви',
+    desc: 'Встань, потряси руками, подумай о другом.',
+    voice: 'Открой глаза. Встань, потряси руками. Обнуляемся.',
+    type: 'timer', sec: 5, btn: 'Сброшено' },
+  { tag: 'tag-s', tagText: 'Раунд 3 из 3 · Шаг 1', title: 'Третье воспоминание',
+    desc: 'Ещё один момент. Может быть когда ты быстро освоил Sage или собрал webpack-конфиг с первого раза.',
+    voice: 'Закрой глаза. Последний раунд — третье воспоминание. Может быть когда собрал webpack с первого раза, или написал чистый кусок кода. Войди внутрь. Двадцать секунд.',
+    autoNext: 20,
+    btn: 'Я там' },
+  { tag: 'tag-s', tagText: 'Раунд 3 из 3 · Шаг 2', title: 'Финальное усиление',
+    desc: 'Последний раз — крупнее, ярче, громче, сильнее. Финальный слой якоря.',
+    voice: 'Глаза закрыты. Последний раз — усиливай на максимум. Ярче, громче, ощущение как можно сильнее. Пятнадцать секунд.',
+    autoNext: 15,
+    btn: 'Максимум есть' },
+  { tag: 'tag-w', tagText: 'Раунд 3 из 3 · Шаг 3', title: 'Финальный пик',
+    desc: 'Удерживай. Этот момент станет финальным слоем якоря.',
+    voice: 'Удерживай. Финальный пик — нажми когда почувствуешь максимум.',
+    type: 'peak', sec: 12, btn: 'Пик!' },
+  { tag: 'tag-d', tagText: 'Раунд 3 из 3 · Шаг 4', title: 'Финальный якорь!',
+    desc: 'ФОКУС + сжать. 7 секунд.',
+    voice: 'Фокус! Сожми пальцы. Финальные семь секунд.',
+    type: 'anchor', sec: 7, btn: 'Отпустил' },
+  { tag: 'tag-i', tagText: 'Установка якоря выхода', title: 'Теперь якорь СТОП',
+    desc: 'Сейчас поставим противоположный якорь — для выхода из состояния. Без него фокус будет «висеть» и быстро тебя выматывать.',
+    school: 'Якорь выхода — это <strong>якорь спокойствия</strong>. Вспомни момент когда ты был расслаблен, отдыхал, вообще не думал о работе. Например — лежал после душа или ехал на Steed по пустой трассе.',
+    voice: 'Теперь якорь выхода — для спокойствия. Вспомни момент когда ты был расслаблен. Например — ехал на Steed по пустой трассе, или лежал после душа. Войди в это ощущение.',
+    autoNext: 18,
+    btn: 'Вспомнил расслабление' },
+  { tag: 'tag-d', tagText: 'Якорь выхода', title: 'Поставь якорь СТОП',
+    desc: 'Сделай глубокий выдох. Одновременно скажи СТОП и разожми пальцы веером. Держи 5 секунд.',
+    school: '<strong>Жест должен отличаться</strong> от якоря фокуса. Сжатие — фокус. Разжатие — стоп.',
+    voice: 'Глубокий выдох. Скажи: Стоп. И разожми пальцы веером. Держи пять секунд.',
+    type: 'exit-anchor', sec: 5, btn: 'Готово' },
+  { test: true }
+];
+
+const fullFlow = [
+  { tag: 'tag-i', tagText: 'Подготовка', title: 'Что мы делаем',
+    desc: '10 минут до работы. Прокачаем мозг физически (кислород, кровоток), поставим цель и активируем якорь.',
+    checklist: ['Сядь прямо или встань', 'Выпей стакан воды', 'Убери телефон', 'Есть 25–90 минут без прерываний'],
+    btn: 'Готов' },
+  { tag: 'tag-s', tagText: 'Блок 1 из 5 — Кислород', title: 'Дыхание 4-7-8',
+    desc: 'Вдох носом — 4 сек. Задержка — 7 сек. Выдох ртом — 8 сек. Три полных цикла.',
+    school: 'Простыми словами: когда задерживаешь дыхание — кровь несёт <strong>больше кислорода в мозг</strong>. Долгий выдох — успокаивает нервы. Это как залить хороший бензин в Lanos перед длинной дорогой.',
+    type: 'breath', cycles: 3, btn: 'Готово' },
+  { tag: 'tag-i', tagText: 'Блок 2 из 5 — Тело', title: '30 секунд движения',
+    desc: 'Выбери: 15–20 прыжков на месте, или 10 приседаний, или потряси всем телом 30 секунд.',
+    school: 'Когда двигаешься — мозг получает <strong>«удобрение для нейронов»</strong> (BDNF). Это вещество делает связи между нейронами крепче. Эффект держится 2–4 часа. Поэтому после прогулки думается лучше.',
+    warn: 'Если совсем нельзя двигаться — потри ладони друг о друга 30 секунд и помассируй уши. Это тоже разгоняет кровь.',
+    type: 'timer', sec: 30, btn: 'Подвигался' },
+  { tag: 'tag-w', tagText: 'Блок 3 из 5 — Цель', title: 'Что будешь делать?',
+    desc: 'Одно предложение. Конкретно. Не «поработаю над проектом» — а «починю фильтр evlsprt в other.xml».',
+    school: 'Размытая цель = мозг ищет что бы поделать = ты залипаешь в YouTube. <strong>Конкретная цель</strong> = мозг сразу включает рабочий режим. Это включает префронтальную кору — зону логики.',
+    type: 'input', btn: 'Готово' },
+  { tag: 'tag-d', tagText: 'Блок 4 из 5 — Якорь', title: 'Активируй фокус',
+    desc: 'ФОКУС + сжать пальцы. Держи 5 секунд. Чувствуй как тело переключается.',
+    school: 'Якорь = <strong>ключ зажигания</strong>. Дыхание и движение завели двигатель. Якорь — переключает передачу в режим «работаем».',
+    type: 'anchor', sec: 5, btn: 'Включился' },
+  { tag: 'tag-i', tagText: 'Блок 5 из 5 — Запуск', title: 'Pomodoro 25 минут',
+    desc: 'Сейчас откроется таймер на 25 минут. Это твоё «окно фокуса». После — обязательно якорь СТОП.',
+    school: '25 минут — это <strong>максимум сильной концентрации</strong> для большинства людей. Дальше падает качество. Поэтому делаем короткий блок и выход.',
+    btn: 'Запустить таймер' },
+  { pomodoro: true }
+];
+
+const quickFlow = [
+  { tag: 'tag-i', tagText: 'Быстрый запуск', title: '90 секунд до работы',
+    desc: 'Минимальная версия. Не заменяет полный протокол, но лучше чем ничего.',
+    btn: 'Поехали' },
+  { tag: 'tag-s', tagText: 'Шаг 1 из 3', title: 'Дыхание 30 секунд',
+    desc: 'Глубокий вдох носом 4 сек, выдох ртом 6 сек. Повторяй пока идёт таймер.',
+    school: 'Быстрый способ <strong>убрать стресс</strong> и вкачать кислород в мозг.',
+    type: 'simplebreath', sec: 30, btn: 'Готово' },
+  { tag: 'tag-w', tagText: 'Шаг 2 из 3', title: 'Что будешь делать?',
+    desc: 'Одно предложение. Конкретно.',
+    type: 'input', btn: 'Готово' },
+  { tag: 'tag-d', tagText: 'Шаг 3 из 3', title: 'Якорь Фокус',
+    desc: 'ФОКУС + сжать. 5 секунд.',
+    type: 'anchor', sec: 5, btn: 'Включён' },
+  { pomodoro: true, short: true }
+];
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (s) {
+      Object.assign(state, s);
+      if (!state.history) state.history = [];
+      if (!state.modeCount) state.modeCount = { install: 0, full: 0, quick: 0 };
+      if (!state.bestStreak) state.bestStreak = state.streak || 0;
+    }
+  } catch (e) {
+    console.warn('Не удалось загрузить состояние', e);
+  }
+  updateHomeStats();
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    showToast('Не удалось сохранить (нет места?)', 'error');
+  }
+}
+
+function updateHomeStats() {
+  document.getElementById('streak-val').textContent = state.streak;
+  document.getElementById('total-val').textContent = state.total;
+  const a = document.getElementById('anchor-val');
+  if (!state.anchorInstalled) a.textContent = '—';
+  else if (state.anchorStrength === 'strong') a.innerHTML = '<span style="color:var(--teal)">✓</span>';
+  else if (state.anchorStrength === 'weak') a.innerHTML = '<span style="color:var(--amber)">~</span>';
+  else a.innerHTML = '<span style="color:var(--teal)">✓</span>';
+}
+
+function showScreen(id) {
+  ['screen-home', 'screen-step', 'screen-test', 'screen-pomodoro', 'screen-exit', 'screen-done', 'screen-stats', 'screen-help'].forEach(s => {
+    document.getElementById(s).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showHelp() {
+  showScreen('screen-help');
+}
+
+let voiceEnabled = false;
+let voiceInt = null;
+let voiceTickInt = null;
+let currentUtterance = null;
+let availableVoices = [];
+let voiceIsSpeaking = false;
+
+function loadVoices() {
+  if (!window.speechSynthesis) return;
+  availableVoices = window.speechSynthesis.getVoices() || [];
+}
+
+function getRussianVoice() {
+  if (!availableVoices.length) loadVoices();
+  return availableVoices.find(v => v.lang && v.lang.toLowerCase() === 'ru-ru')
+    || availableVoices.find(v => v.lang && v.lang.toLowerCase().startsWith('ru'))
+    || null;
+}
+
+function setVoiceStatus(text) {
+  const el = document.getElementById('voice-status');
+  if (el) el.textContent = text || '';
+}
+
+function setNextButtonState(disabled, text, className) {
+  const btn = document.getElementById('btn-next');
+  if (!btn) return;
+  btn.disabled = !!disabled;
+  if (text) btn.innerHTML = text;
+  btn.classList.remove('voice-wait', 'voice-ready');
+  if (className) btn.classList.add(className);
+}
+
+function speak(text, onEnd, onError) {
+  if (!text) { if (onEnd) onEnd(); return; }
+  if (!voiceEnabled || !window.speechSynthesis) { if (onEnd) onEnd(); return; }
+  stopVoice(false);
+  const u = new SpeechSynthesisUtterance(text);
+  const ruVoice = getRussianVoice();
+  if (ruVoice) u.voice = ruVoice;
+  u.lang = ruVoice ? ruVoice.lang : 'ru-RU';
+  u.rate = 0.88;
+  u.pitch = 1;
+  currentUtterance = u;
+  voiceIsSpeaking = true;
+  u.onend = () => {
+    voiceIsSpeaking = false;
+    currentUtterance = null;
+    if (onEnd) onEnd();
+  };
+  u.onerror = () => {
+    voiceIsSpeaking = false;
+    currentUtterance = null;
+    if (onError) onError();
+    else if (onEnd) onEnd();
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function stopVoice(clearStatus = true) {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  clearTimeout(voiceInt);
+  clearInterval(voiceTickInt);
+  voiceInt = null;
+  voiceTickInt = null;
+  currentUtterance = null;
+  voiceIsSpeaking = false;
+  if (clearStatus) setVoiceStatus('');
+}
+
+function buildVoiceTextForStep(s) {
+  if (!s) return '';
+  if (s.voice) return s.voice;
+  const parts = [];
+  if (s.title) parts.push(s.title);
+  if (s.desc) parts.push(stripHtml(s.desc));
+  if (s.type === 'input') parts.push('Запиши задачу одним конкретным предложением. После этого нажми кнопку дальше.');
+  else if (s.type === 'breath') parts.push('Следуй подсказкам на экране. После завершения дыхания нажми кнопку дальше.');
+  else if (s.type === 'simplebreath') parts.push('Дыши по подсказкам на экране. После таймера нажми кнопку дальше.');
+  else if (s.type === 'timer') parts.push('Выполняй действие пока идёт таймер. После таймера нажми кнопку дальше.');
+  else if (s.type === 'anchor') parts.push('Держи якорь пока идёт таймер. После сигнала нажми кнопку дальше.');
+  else if (s.type === 'exit-anchor') parts.push('Держи якорь выхода пока идёт таймер. После сигнала нажми кнопку дальше.');
+  else if (s.type === 'peak') parts.push('Жди пика. Когда почувствуешь максимум, нажми кнопку.');
+  else parts.push('Когда будешь готов, нажми кнопку дальше.');
+  return parts.join('. ');
+}
+
+function stripHtml(text) {
+  const div = document.createElement('div');
+  div.innerHTML = text || '';
+  return div.textContent || div.innerText || '';
+}
+
+function getNextButtonLabel(s) {
+  return (s && s.btn ? s.btn : 'Далее') + ' →';
+}
+
+function activateNextAfterVoice(s, opts = {}) {
+  const label = getNextButtonLabel(s);
+  if (opts.keepDisabled) {
+    setVoiceStatus(opts.status || 'Выполняй шаг по инструкции.');
+    return;
+  }
+  setNextButtonState(false, label, 'voice-ready');
+  setVoiceStatus(opts.status || 'Голос закончил. Можно переходить дальше.');
+}
+
+function startVoiceGateForStep(s, opts = {}) {
+  clearTimeout(voiceInt);
+  clearInterval(voiceTickInt);
+  const label = getNextButtonLabel(s);
+  const shouldWaitForVoice = voiceEnabled && !!buildVoiceTextForStep(s);
+
+  if (shouldWaitForVoice && !opts.timerControlsButton) {
+    setNextButtonState(true, 'Слушай инструкцию…', 'voice-wait');
+    setVoiceStatus('Голос говорит инструкцию. Кнопка станет доступна после окончания.');
+  } else if (!opts.timerControlsButton) {
+    setNextButtonState(false, label, '');
+    setVoiceStatus('');
+  }
+
+  const afterVoice = () => {
+    if (s.autoNext && !s.type) startAutoNextCountdown(s);
+    else activateNextAfterVoice(s, { keepDisabled: opts.timerControlsButton, status: opts.timerControlsButton ? 'Дождись окончания таймера.' : 'Голос закончил. Нажми кнопку чтобы перейти дальше.' });
+  };
+
+  speak(buildVoiceTextForStep(s), afterVoice, afterVoice);
+
+  if (!shouldWaitForVoice) {
+    if (s.autoNext && !s.type) startAutoNextCountdown(s);
+    return;
+  }
+}
+
+function startAutoNextCountdown(s) {
+  clearTimeout(voiceInt);
+  clearInterval(voiceTickInt);
+  let left = Number(s.autoNext) || 0;
+  const orig = s.btn || 'Далее';
+  if (left <= 0) {
+    activateNextAfterVoice(s, { status: 'Можно переходить дальше.' });
+    return;
+  }
+  setNextButtonState(true, `${orig} (${left}с) →`, 'voice-wait');
+  setVoiceStatus('Выполняй инструкцию. Переход откроется после отсчёта.');
+  voiceTickInt = setInterval(() => {
+    left--;
+    if (left > 0) {
+      setNextButtonState(true, `${orig} (${left}с) →`, 'voice-wait');
+      return;
+    }
+    clearInterval(voiceTickInt);
+    voiceTickInt = null;
+    activateNextAfterVoice(s, { status: 'Готово. Нажми кнопку чтобы перейти к следующему шагу.' });
+    speak('Готово. Нажми кнопку чтобы перейти к следующему шагу.');
+  }, 1000);
+}
+
+if (window.speechSynthesis) {
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+}
+
+function toggleVoice() {
+  voiceEnabled = !voiceEnabled;
+  const btn = document.getElementById('voice-toggle');
+  if (btn) {
+    btn.innerHTML = voiceEnabled
+      ? '<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>'
+      : '<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
+    btn.title = voiceEnabled ? 'Голос включён' : 'Голос выключен';
+    btn.style.color = voiceEnabled ? 'var(--teal)' : '';
+    btn.style.borderColor = voiceEnabled ? 'var(--teal)' : '';
+  }
+  showToast(voiceEnabled ? 'Голос включён — закрывай глаза' : 'Голос выключен');
+  if (voiceEnabled) {
+    speak('Голос включён. Теперь можешь закрывать глаза — я буду говорить что делать.');
+  }
+  localStorage.setItem('voice_enabled', voiceEnabled ? '1' : '0');
+}
+
+let wakeLock = null;
+async function requestWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLock = await navigator.wakeLock.request('screen');
+    }
+  } catch (e) {}
+}
+function releaseWakeLock() {
+  if (wakeLock) { try { wakeLock.release(); } catch(e){} wakeLock = null; }
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && (pomRunning || timerInt || breathInt)) {
+    requestWakeLock();
+  }
+});
+
+function startMode(m) {
+  if ((m === 'full' || m === 'quick') && !state.anchorInstalled) {
+    if (confirm('Якорь ещё не установлен. Этот протокол использует якорь — он не сработает.\n\nХочешь сначала установить якорь? (рекомендую)')) {
+      mode = 'install';
+      stepIdx = 0;
+      stepFlow = installFlow;
+      showScreen('screen-step');
+      renderStep();
+      return;
+    }
+  }
+  mode = m;
+  stepIdx = 0;
+  stepFlow = m === 'install' ? installFlow : m === 'full' ? fullFlow : quickFlow;
+  showScreen('screen-step');
+  renderStep();
+}
+
+function renderStep() {
+  clearTimers();
+  stopVoice();
+  const s = stepFlow[stepIdx];
+  if (s.test) { showScreen('screen-test'); speak('Сейчас протестируем якорь. Сначала разорви состояние. Потом нажми кнопку Активировать якорь сейчас.'); return; }
+  if (s.pomodoro) { startPomodoro(s.short); return; }
+
+  document.getElementById('prog').style.width = Math.round(stepIdx / stepFlow.length * 100) + '%';
+  buildDots();
+
+  const bn = document.getElementById('btn-next');
+  const bs = document.getElementById('btn-skip');
+  bn.disabled = false;
+  bn.innerHTML = getNextButtonLabel(s);
+  bn.classList.remove('voice-wait', 'voice-ready');
+  bs.style.display = 'none';
+  setVoiceStatus('');
+
+  let html = `<div class="card"><span class="tag ${s.tag}">${s.tagText}</span><div class="h1">${s.title}</div><div class="txt" style="margin-top:8px">${s.desc}</div>`;
+  if (s.school) html += `<div class="school">${s.school}</div>`;
+  if (s.warn) html += `<div class="warn">${s.warn}</div>`;
+  if (s.checklist) {
+    html += '<div class="checklist">';
+    s.checklist.forEach(c => html += `<div class="chk"><span class="chk-icon">✓</span>${c}</div>`);
+    html += '</div>';
+  }
+  html += '</div>';
+
+  if (s.type === 'peak') {
+    html += `<div class="card" style="text-align:center"><div class="peak" id="peak"></div><div class="timer-big" id="t-num">${s.sec}</div><div class="timer-lbl">секунд до пика</div><div class="tbar"><div class="tbar-fill" id="t-bar"></div></div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    buildPeak();
+    startPeak();
+    startTimer(s.sec);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'anchor') {
+    html += `<div class="card"><div class="anchor-zone glow"><div class="anchor-w">ФОКУС</div><div class="anchor-g">Сожми большой и указательный</div></div><div class="timer-big" id="t-num">${s.sec}</div><div class="timer-lbl">держи</div><div class="tbar"><div class="tbar-fill" id="t-bar"></div></div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    startTimer(s.sec);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'exit-anchor') {
+    html += `<div class="card"><div class="anchor-zone glow"><div class="anchor-w exit">СТОП</div><div class="anchor-g">Выдох + разожми пальцы веером</div></div><div class="timer-big" id="t-num">${s.sec}</div><div class="timer-lbl">держи</div><div class="tbar"><div class="tbar-fill" id="t-bar"></div></div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    startTimer(s.sec);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'timer') {
+    html += `<div class="card" style="text-align:center"><div class="timer-big" id="t-num">${s.sec}</div><div class="timer-lbl">секунд</div><div class="tbar"><div class="tbar-fill" id="t-bar"></div></div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    startTimer(s.sec);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'breath') {
+    html += `<div class="card" style="text-align:center"><div class="h2" id="br-phase">Готов?</div><div class="timer-big" id="br-num" style="margin-top:1rem">-</div><div class="timer-lbl" id="br-cycle">цикл 0 из ${s.cycles}</div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    runBreath(s.cycles);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'simplebreath') {
+    html += `<div class="card" style="text-align:center"><div class="h2" id="br-phase">Вдох носом</div><div class="timer-big" id="t-num">${s.sec}</div><div class="timer-lbl">секунд осталось</div><div class="tbar"><div class="tbar-fill" id="t-bar"></div></div></div>`;
+    document.getElementById('step-body').innerHTML = html;
+    bn.disabled = true;
+    bs.style.display = 'block';
+    startTimer(s.sec);
+    let cnt = 0;
+    const ph = document.getElementById('br-phase');
+    breathInt = setInterval(() => {
+      cnt++;
+      if (ph) ph.textContent = cnt % 2 ? 'Выдох ртом' : 'Вдох носом';
+    }, 5000);
+    startVoiceGateForStep(s, { timerControlsButton: true });
+    return;
+  }
+  if (s.type === 'input') {
+    const lastVal = state.lastTask ? state.lastTask.replace(/"/g, '&quot;') : '';
+    const placeholder = state.lastTask ? '' : 'Например: разобраться почему фильтр evlsprt не парсится в other.xml';
+    html += `<div class="card"><textarea id="task-input" placeholder="${placeholder}">${lastVal}</textarea><div style="font-size:12px;color:var(--txt-3);margin-top:8px">Сохранится для Pomodoro</div></div>`;
+  }
+  document.getElementById('step-body').innerHTML = html;
+
+  startVoiceGateForStep(s);
+}
+
+function buildDots() {
+  const c = document.getElementById('dots');
+  c.innerHTML = '';
+  for (let i = 0; i < stepFlow.length; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < stepIdx ? ' done' : i === stepIdx ? ' active' : '');
+    c.appendChild(d);
+  }
+}
+
+function buildPeak() {
+  const m = document.getElementById('peak');
+  if (!m) return;
+  m.innerHTML = '';
+  for (let i = 0; i < 14; i++) {
+    const b = document.createElement('div');
+    b.className = 'peak-b';
+    b.style.height = '8px';
+    m.appendChild(b);
+  }
+}
+
+function startPeak() {
+  let phase = 0;
+  clearInterval(peakInt);
+  peakInt = setInterval(() => {
+    phase++;
+    document.querySelectorAll('.peak-b').forEach((b, i) => {
+      const prog = Math.min(1, phase / 16);
+      const wave = Math.sin((i / 14) * Math.PI) * prog;
+      b.style.height = Math.max(8, Math.round(wave * 42) + 8) + 'px';
+      const pct = wave * 100;
+      b.style.background = pct > 60 ? 'var(--teal)' : pct > 30 ? 'var(--amber)' : 'var(--border)';
+    });
+  }, 200);
+}
+
+function startTimer(sec) {
+  timerLeft = sec;
+  timerMax = sec;
+  const num = document.getElementById('t-num');
+  const bar = document.getElementById('t-bar');
+  if (num) num.textContent = sec;
+  if (bar) bar.style.width = '0%';
+  clearInterval(timerInt);
+  requestWakeLock();
+  timerInt = setInterval(() => {
+    timerLeft--;
+    if (num) num.textContent = Math.max(0, timerLeft);
+    if (bar) bar.style.width = Math.round((timerMax - timerLeft) / timerMax * 100) + '%';
+    if (timerLeft <= 0) {
+      clearInterval(timerInt);
+      clearInterval(breathInt);
+      const bn = document.getElementById('btn-next');
+      const bs = document.getElementById('btn-skip');
+      if (bn) { bn.disabled = false; bn.classList.add('voice-ready'); }
+      if (bs) bs.style.display = 'none';
+      setVoiceStatus('Готово. Нажми кнопку чтобы перейти дальше.');
+    }
+  }, 1000);
+}
+
+function runBreath(totalCycles) {
+  let cycle = 0;
+  let phase = 0;
+  const phases = [
+    { label: 'Вдох через нос', sec: 4 },
+    { label: 'Задержка', sec: 7 },
+    { label: 'Выдох через рот', sec: 8 }
+  ];
+  const ph = document.getElementById('br-phase');
+  const num = document.getElementById('br-num');
+  const cyc = document.getElementById('br-cycle');
+
+  function nextPhase() {
+    if (cycle >= totalCycles) {
+      if (ph) ph.textContent = 'Готово';
+      if (num) num.textContent = '';
+      const bn = document.getElementById('btn-next');
+      const bs = document.getElementById('btn-skip');
+      if (bn) { bn.disabled = false; bn.classList.add('voice-ready'); }
+      if (bs) bs.style.display = 'none';
+      setVoiceStatus('Готово. Нажми кнопку чтобы перейти дальше.');
+      return;
+    }
+    const p = phases[phase];
+    if (ph) ph.textContent = p.label;
+    if (cyc) cyc.textContent = 'цикл ' + (cycle + 1) + ' из ' + totalCycles;
+    let t = p.sec;
+    if (num) num.textContent = t;
+    clearInterval(breathInt);
+    breathInt = setInterval(() => {
+      t--;
+      if (num) num.textContent = t;
+      if (t <= 0) {
+        clearInterval(breathInt);
+        phase++;
+        if (phase >= phases.length) { phase = 0; cycle++; }
+        setTimeout(nextPhase, 300);
+      }
+    }, 1000);
+  }
+  nextPhase();
+}
+
+function skipTimer() {
+  clearInterval(timerInt);
+  clearInterval(breathInt);
+  const bn = document.getElementById('btn-next');
+  const bs = document.getElementById('btn-skip');
+  if (bn) { bn.disabled = false; bn.classList.add('voice-ready'); }
+  if (bs) bs.style.display = 'none';
+  setVoiceStatus('Таймер пропущен. Можно переходить дальше.');
+  const num = document.getElementById('t-num');
+  const bar = document.getElementById('t-bar');
+  if (num) num.textContent = '0';
+  if (bar) bar.style.width = '100%';
+}
+
+function clearTimers() {
+  clearInterval(timerInt);
+  clearInterval(breathInt);
+  clearInterval(peakInt);
+  clearInterval(pomInt);
+  stopVoice();
+}
+
+function nextStep() {
+  const s = stepFlow[stepIdx];
+  if (s.type === 'input') {
+    const v = document.getElementById('task-input');
+    if (v && v.value.trim()) {
+      state.lastTask = v.value.trim();
+      saveState();
+    } else if (!state.lastTask) {
+      alert('Напиши хотя бы одно предложение про задачу');
+      return;
+    }
+  }
+  stepIdx++;
+  if (stepIdx >= stepFlow.length) { finish(); return; }
+  renderStep();
+}
+
+function abort() {
+  clearTimers();
+  if (confirm('Прервать сессию? Прогресс этой сессии не сохранится.')) {
+    showScreen('screen-home');
+  }
+}
+
+function testAnchor() {
+  speak('Фокус. Сожми большой и указательный пальцы. Отметь что почувствовал: сильно, слабо или никак.');
+  document.getElementById('test-result').classList.remove('hidden');
+}
+
+function finishTest(strength) {
+  state.anchorInstalled = true;
+  state.anchorStrength = strength;
+  saveState();
+  finishWithMode('install', strength);
+}
+
+function startPomodoro(short) {
+  showScreen('screen-pomodoro');
+  const taskDisplay = document.getElementById('task-display');
+  taskDisplay.innerHTML = '<strong>Задача:</strong> ';
+  taskDisplay.appendChild(document.createTextNode(state.lastTask || '(не указана)'));
+  pomLeft = short ? 15 * 60 : 25 * 60;
+  pomMax = pomLeft;
+  pomRunning = false;
+  updatePom();
+  document.querySelector('#screen-pomodoro .tag').textContent = short ? 'Pomodoro 15 мин' : 'Pomodoro 25 мин';
+  const btn = document.getElementById('pom-btn');
+  btn.innerHTML = '▶ Запустить';
+  speak(short ? 'Быстрый запуск завершён. Сейчас таймер на пятнадцать минут. Нажми Запустить и работай над задачей.' : 'Протокол завершён. Сейчас таймер на двадцать пять минут. Нажми Запустить и работай над задачей.');
+}
+
+function togglePom() {
+  const btn = document.getElementById('pom-btn');
+  if (!pomRunning) {
+    pomRunning = true;
+    btn.innerHTML = '⏸ Пауза';
+    requestWakeLock();
+    pomInt = setInterval(() => {
+      pomLeft--;
+      updatePom();
+      if (pomLeft <= 0) { clearInterval(pomInt); endPomodoro(); }
+    }, 1000);
+  } else {
+    pomRunning = false;
+    clearInterval(pomInt);
+    btn.innerHTML = '▶ Продолжить';
+  }
+}
+
+function updatePom() {
+  const m = Math.floor(pomLeft / 60);
+  const s = pomLeft % 60;
+  document.getElementById('pom-num').textContent = m + ':' + String(s).padStart(2, '0');
+  document.getElementById('pom-bar').style.width = Math.round((pomMax - pomLeft) / pomMax * 100) + '%';
+}
+
+function endPomodoro() {
+  clearInterval(pomInt);
+  showScreen('screen-exit');
+  startExit();
+}
+
+function startExit() {
+  speak('Работа завершена. Сделай якорь выхода. Глубокий выдох. Скажи Стоп. Разожми пальцы веером.');
+  let t = 5;
+  document.getElementById('exit-num').textContent = t;
+  document.getElementById('exit-bar').style.width = '0%';
+  document.getElementById('exit-btn').disabled = true;
+  clearInterval(timerInt);
+  timerInt = setInterval(() => {
+    t--;
+    document.getElementById('exit-num').textContent = Math.max(0, t);
+    document.getElementById('exit-bar').style.width = Math.round((5 - t) / 5 * 100) + '%';
+    if (t <= 0) {
+      clearInterval(timerInt);
+      document.getElementById('exit-btn').disabled = false;
+    }
+  }, 1000);
+}
+
+function finishExit() {
+  finishWithMode(mode, null);
+}
+
+function finishWithMode(m, strength) {
+  const today = new Date().toDateString();
+  if (state.lastDate !== today) {
+    if (state.lastDate) {
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      state.streak = state.lastDate === yesterday ? state.streak + 1 : 1;
+    } else {
+      state.streak = 1;
+    }
+    state.lastDate = today;
+  }
+  if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+  state.total++;
+  if (state.modeCount[m] !== undefined) state.modeCount[m]++;
+
+  state.history.unshift({
+    date: new Date().toISOString(),
+    mode: m,
+    task: state.lastTask || null,
+    anchorStrength: strength
+  });
+  if (state.history.length > 100) state.history = state.history.slice(0, 100);
+
+  saveState();
+  showScreen('screen-done');
+
+  document.getElementById('d-streak').textContent = state.streak;
+  document.getElementById('d-total').textContent = state.total;
+  const modeLabels = { install: 'Установка', full: 'Полный', quick: 'Быстрый' };
+  document.getElementById('d-mode').textContent = modeLabels[m] || '—';
+
+  let tip = '';
+  if (m === 'install') {
+    if (strength === 'strong') tip = 'Якорь установлен крепко. Подкорми через 1–2 недели — пройди этот режим снова с новыми воспоминаниями.';
+    else if (strength === 'weak') tip = 'Якорь слабоват — пройди установку ещё раз сегодня или завтра. Это нормально с первого раза.';
+    else tip = 'Якорь не зацепился. Это бывает — попробуй ещё раз через час с другими воспоминаниями.';
+  } else if (m === 'full') tip = 'Окно фокуса 2–3 часа. Делай якорь Стоп после каждого Pomodoro чтобы не выгорать.';
+  else tip = 'Это был быстрый запуск. Если есть 10 минут — лучше делай полный протокол: эффект сильнее.';
+  document.getElementById('next-tip').textContent = tip;
+  document.getElementById('done-msg').textContent = 'Прогресс сохранён.';
+  speak('Сессия завершена. Прогресс сохранён.');
+}
+
+function finish() {
+  finishWithMode(mode, null);
+}
+
+function goHome() {
+  releaseWakeLock();
+  updateHomeStats();
+  showScreen('screen-home');
+}
+
+function showStats() {
+  showScreen('screen-stats');
+  document.getElementById('s-streak').textContent = state.streak;
+  document.getElementById('s-best').textContent = state.bestStreak;
+  document.getElementById('s-total').textContent = state.total;
+  document.getElementById('s-install').textContent = state.modeCount.install;
+  document.getElementById('s-full').textContent = state.modeCount.full;
+  document.getElementById('s-quick').textContent = state.modeCount.quick;
+  buildHeatmap();
+  buildHistory();
+}
+
+function buildHeatmap() {
+  const hm = document.getElementById('heatmap');
+  hm.innerHTML = '';
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const counts = {};
+  state.history.forEach(h => {
+    const d = new Date(h.date);
+    d.setHours(0, 0, 0, 0);
+    const key = d.toDateString();
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  const days = 14 * 7;
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = d.toDateString();
+    const c = counts[key] || 0;
+    const cell = document.createElement('div');
+    let cls = 'hm-cell';
+    if (c === 1) cls += ' l1';
+    else if (c === 2) cls += ' l2';
+    else if (c >= 3) cls += ' l3';
+    if (key === today.toDateString()) cls += ' today';
+    cell.className = cls;
+    cell.title = d.toLocaleDateString('ru-RU') + ': ' + c + ' сессий';
+    hm.appendChild(cell);
+  }
+}
+
+function buildHistory() {
+  const hl = document.getElementById('history-list');
+  if (!state.history.length) {
+    hl.innerHTML = '<div class="empty">Пока нет истории</div>';
+    return;
+  }
+  hl.innerHTML = '';
+  const modeLabels = { install: 'Установка', full: 'Полный', quick: 'Быстрый' };
+  state.history.slice(0, 10).forEach(h => {
+    const d = new Date(h.date);
+    const dateStr = d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    const taskShort = h.task ? (h.task.length > 30 ? h.task.slice(0, 30) + '…' : h.task) : '—';
+    hl.innerHTML += `<div class="history-item">
+      <span class="history-date">${dateStr}</span>
+      <span class="history-mode">${taskShort}</span>
+      <span class="history-mark ${h.mode}">${modeLabels[h.mode] || h.mode}</span>
+    </div>`;
+  });
+}
+
+function exportData() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type: 'application/json' });
+  const date = new Date().toISOString().slice(0, 10);
+  const fileName = `focus-trainer-${date}.json`;
+
+  if (navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, { type: 'application/json' })] })) {
+    const file = new File([blob], fileName, { type: 'application/json' });
+    navigator.share({ files: [file], title: fileName }).catch(() => downloadFallback(blob, fileName));
+  } else {
+    downloadFallback(blob, fileName);
+  }
+}
+
+function downloadFallback(blob, fileName) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Сохранено: ' + fileName);
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (typeof data.streak === 'undefined' && typeof data.total === 'undefined') {
+        showToast('Файл не похож на данные тренажёра', 'error');
+        return;
+      }
+      if (!confirm('Заменить текущие данные данными из файла?')) return;
+      Object.assign(state, data);
+      if (!state.history) state.history = [];
+      if (!state.modeCount) state.modeCount = { install: 0, full: 0, quick: 0 };
+      saveState();
+      updateHomeStats();
+      showToast('Данные загружены');
+      if (!document.getElementById('screen-stats').classList.contains('hidden')) showStats();
+    } catch (err) {
+      showToast('Ошибка чтения файла', 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function resetAll() {
+  if (!confirm('Удалить все данные? (стрик, история, состояние якоря)\n\nЭто нельзя отменить.')) return;
+  if (!confirm('Точно? Прогресс будет потерян.')) return;
+  state = {
+    streak: 0,
+    bestStreak: 0,
+    total: 0,
+    lastDate: null,
+    anchorInstalled: false,
+    anchorStrength: 'unknown',
+    lastTask: '',
+    history: [],
+    modeCount: { install: 0, full: 0, quick: 0 }
+  };
+  saveState();
+  updateHomeStats();
+  showStats();
+  showToast('Все данные удалены');
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  if (type === 'error') {
+    t.style.borderColor = 'var(--red)';
+    t.style.color = 'var(--red)';
+  } else {
+    t.style.borderColor = 'var(--teal)';
+    t.style.color = 'var(--teal)';
+  }
+  setTimeout(() => { t.classList.add('hidden'); }, 2500);
+}
+
+function detectIOS() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+  if (isIOS && !isStandalone && !localStorage.getItem('ios_banner_seen')) {
+    const b = document.getElementById('ios-banner');
+    if (b) b.classList.remove('hidden');
+  }
+}
+
+function dismissIOSBanner() {
+  localStorage.setItem('ios_banner_seen', '1');
+  const b = document.getElementById('ios-banner');
+  if (b) b.classList.add('hidden');
+}
+
+loadState();
+detectIOS();
+if (localStorage.getItem('voice_enabled') === '1') {
+  voiceEnabled = true;
+  const btn = document.getElementById('voice-toggle');
+  if (btn) {
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
+    btn.title = 'Голос включён';
+    btn.style.color = 'var(--teal)';
+    btn.style.borderColor = 'var(--teal)';
+  }
+}
+</script>
+</body>
+</html>
