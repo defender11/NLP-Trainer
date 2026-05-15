@@ -2,9 +2,9 @@
 
 ## Проект
 
-Focus Trainer — оффлайн PWA-тренажёр фокуса и NLP-якорения.
+Focus Trainer - оффлайн PWA-тренажер фокуса и NLP-якорения.
 
-Проект начинался как один HTML-файл, но постепенно переводится в модульную архитектуру.
+Проект начался как один HTML-файл и переводится в модульную архитектуру.
 
 Главная цель проекта:
 
@@ -35,7 +35,7 @@ Focus Trainer — оффлайн PWA-тренажёр фокуса и NLP-яко
 
 ### Главный принцип
 
-UI не должен управлять логикой напрямую.
+UI не управляет бизнес-логикой напрямую.
 
 Нельзя:
 
@@ -50,6 +50,76 @@ UI не должен управлять логикой напрямую.
 - делать маленькие функции;
 - избегать глобального состояния.
 
+### Контракты между модулями
+
+Каждый модуль общается через явные события и команды, а не через скрытые side effects.
+
+Общий формат сообщений:
+
+```js
+{
+  type: 'EVENT_NAME',
+  payload: {},
+  meta: {
+    source: 'worker',
+    ts: Date.now()
+  }
+}
+```
+
+Разрешенные связи:
+
+- `ui -> app`: только пользовательские intents;
+- `app -> trainer`: команды сценария и lifecycle;
+- `trainer -> app`: изменения состояния тренировки;
+- `worker -> app`: timer ticks, done, heartbeat, worker errors;
+- `app -> ui`: только view model и команды рендера;
+- `app <-> storage`: загрузка/сохранение состояния.
+
+Запрещенные связи:
+
+- `ui -> trainer` напрямую;
+- `ui -> worker` напрямую;
+- `trainer -> ui` напрямую;
+- любая бизнес-логика в `ui.js`.
+
+---
+
+## Документация и синхронизация контекста
+
+- Перед началом задачи агент всегда учитывает `AGENTS.md`.
+- Если изменились `.md` файлы, агент перечитывает только измененные файлы перед правками кода.
+- Для проверки изменений использовать `git status` и `git diff --name-only -- '*.md'`.
+- Если пользователь явно указал файл (`README.md`, `md-docs/ROADMAP.md`, `ARCHITECTURE.md`), агент обязан свериться с ним перед выполнением.
+- Пользовательские markdown-файлы хранить в папке [md-docs/user-md](./md-docs/user-md/).
+- Если существует `md-docs/user-md/USER_GIT_ALIASES.md`, агент может использовать и цитировать алиасы из него при git-командах.
+
+---
+
+## Рекомендуемые .md для рабочего проекта
+
+Оптимальный приоритет чтения для агента:
+
+1. `AGENTS.md` - правила работы агента с кодовой базой и процессом.
+2. `README.md` - как запустить проект и что он делает.
+3. `ARCHITECTURE.md` - границы модулей, контракты, поток данных.
+4. `CONTRIBUTING.md` - правила PR, коммитов, веток и ревью.
+5. `RUNBOOK.md` - действия при инцидентах, деградации и восстановлении.
+6. `md-docs/ROADMAP.md` - будущие фичи, этапы и технические направления.
+
+Дополнительные полезные `.md`:
+
+- `CHANGELOG.md` - история изменений по версиям и релизам.
+- `TESTING.md` - тестовая стратегия, smoke/regression чеклисты, команды запуска.
+- `SECURITY.md` - правила безопасной разработки, disclosure, ограничения по данным.
+- `RELEASE.md` - процесс подготовки и выпуска релиза.
+- `API.md` - публичные API/события/контракты и примеры использования.
+- `DECISIONS.md` или `md-docs/adr/*.md` - архитектурные решения и причины выбора.
+- `TROUBLESHOOTING.md` - частые проблемы и быстрые способы диагностики.
+- `md-docs/user-md/USER_GIT_ALIASES.md` - пользовательские git-алиасы (необязательно), чтобы ускорить работу в терминале.
+
+Если файла пока нет, но потребность появилась, его лучше создать до крупного рефакторинга.
+
 ---
 
 ## Структура проекта
@@ -57,8 +127,12 @@ UI не должен управлять логикой напрямую.
 ```text
 focus-trainer/
 ├── index.html
-├── README.md
+├── README.md (optional)
 ├── AGENTS.md
+├── md-docs/
+│   ├── ROADMAP.md
+│   └── user-md/
+│       └── USER_GIT_ALIASES.md (optional)
 ├── public/
 │   ├── icons/
 │   └── sounds/
@@ -90,7 +164,8 @@ focus-trainer/
 
 - инициализация;
 - wiring модулей;
-- boot приложения.
+- boot приложения;
+- маршрутизация событий между модулями.
 
 Не хранить бизнес-логику.
 
@@ -98,7 +173,7 @@ focus-trainer/
 
 ### trainer.js
 
-Главный state-machine тренажёра.
+Главный state-machine тренажера.
 
 Отвечает за:
 
@@ -132,9 +207,9 @@ export const quickFlow = [];
 
 ### voice.js
 
-Всё связанное с:
+Все, что связано с:
 
-- speechSynthesis;
+- `speechSynthesis`;
 - голосами;
 - очередями;
 - fallback;
@@ -144,7 +219,8 @@ export const quickFlow = [];
 
 - graceful fallback;
 - не ломать приложение, если voice unavailable;
-- stop/cancel API.
+- `stop/cancel` API;
+- `utterance.onerror` с разблокировкой UI-переходов.
 
 ---
 
@@ -169,10 +245,12 @@ S
 Ы
 ```
 
-Нельзя:
+Обязательные правила:
 
-- ломать accessibility;
-- hijack input fields.
+- не ломать accessibility;
+- не hijack input fields;
+- игнорировать обработку при фокусе на `input`, `textarea`, `select`, `contenteditable`;
+- игнорировать комбинации с `metaKey`, `ctrlKey`, `altKey`.
 
 ---
 
@@ -191,7 +269,7 @@ S
 - DOM;
 - speech.
 
-Все данные валидируются.
+Все данные валидируются до использования.
 
 ---
 
@@ -210,6 +288,8 @@ S
 - cleanup;
 - background mode.
 
+Основная стратегия: постепенно переносить timer loops в `worker.js`.
+
 ---
 
 ### worker.js
@@ -224,8 +304,8 @@ Web Worker для:
 Worker не должен:
 
 - трогать DOM;
-- использовать window;
-- использовать document.
+- использовать `window`;
+- использовать `document`.
 
 Только message passing.
 
@@ -234,7 +314,9 @@ Worker не должен:
 ```js
 worker.postMessage({
   type: 'START_TIMER',
-  duration: 30
+  payload: {
+    durationSec: 30
+  }
 });
 ```
 
@@ -253,7 +335,9 @@ WebSocket layer.
 
 Не делать обязательным.
 
-Приложение должно полностью работать оффлайн.
+Приложение должно полностью работать оффлайн без `ws.js`.
+
+Долгосрочные WS-идеи вынесены в [md-docs/ROADMAP.md](./md-docs/ROADMAP.md).
 
 ---
 
@@ -273,15 +357,20 @@ WebSocket layer.
 
 Использовать:
 
-- snakeCase для переменных и функций;
+- camelCase для переменных и функций;
 - маленькие функции;
 - early return;
 - guard clauses.
 
+Уточнение по naming:
+
+- если функция/поле экспортируется как публичный контракт или используется внешним API, допускается локальная конвенция проекта/платформы;
+- внутри модулей по умолчанию `camelCase`.
+
 Пример:
 
 ```js
-function start_timer(seconds) {
+function startTimer(seconds) {
   if (!seconds) {
     return;
   }
@@ -297,9 +386,9 @@ function start_timer(seconds) {
 Нельзя:
 
 - giant functions;
-- inline onclick;
+- inline `onclick`;
 - inline styles;
-- innerHTML с пользовательскими данными;
+- `innerHTML` с пользовательскими данными;
 - глобальные mutable singletons;
 - смешивать voice/UI/timers.
 
@@ -341,18 +430,13 @@ createTextNode
 
 Voice-first UX.
 
-Если голос включён:
+Если голос включен:
 
-- шаги должны озвучиваться автоматически;
-- переходы должны работать с клавиатуры;
-- не должно быть deadlock состояния;
-- кнопки должны разблокироваться после voice completion.
-
-Обязательно:
-
-```js
-utterance.onerror
-```
+- шаги озвучиваются автоматически;
+- переходы работают с клавиатуры;
+- не должно быть deadlock-состояний;
+- кнопки разблокируются после voice completion;
+- при ошибке озвучки сценарий продолжается в silent-mode.
 
 ---
 
@@ -365,6 +449,59 @@ utterance.onerror
 - installable app;
 - wake lock;
 - iOS Safari.
+
+### PWA update strategy
+
+- новая версия не должна обрывать активную тренировку;
+- update prompt показывается после завершения шага/сессии;
+- ручной reload контролируется через UI-команду;
+- при проблеме с cache всегда есть fallback на последнюю рабочую версию.
+
+---
+
+## Политика ошибок и fallback
+
+### Voice ошибки
+
+- логируем событие;
+- переключаемся в silent-mode;
+- разблокируем переходы шагов;
+- приложение продолжает работу.
+
+### Worker ошибки
+
+- логируем событие;
+- выполняем одну попытку перезапуска worker;
+- если неуспешно, включаем degraded fallback таймер в main thread;
+- пользовательский flow не должен зависнуть.
+
+### Storage ошибки
+
+- при `QuotaExceededError` отключаем autosave;
+- показываем явное уведомление;
+- предлагаем экспорт состояния;
+- не ломаем текущую сессию.
+
+---
+
+## Схема данных и миграции
+
+Каждый сохраненный state обязан содержать:
+
+```js
+{
+  schema_version: number,
+  saved_at: string,
+  data: {}
+}
+```
+
+Правила:
+
+- любая загрузка проходит validation перед использованием;
+- каждая несовместимая правка схемы добавляет migration step;
+- цепочка миграций должна быть детерминированной;
+- если state поврежден и не мигрируется безопасно, состояние отбрасывается с fallback на defaults.
 
 ---
 
@@ -382,35 +519,6 @@ worker -> app -> ui
 
 ---
 
-## WebSocket roadmap
-
-### Возможные будущие фичи
-
-#### 1. Remote focus sync
-
-Синхронизация состояния между:
-
-- Mac;
-- iPhone;
-- iPad.
-
-#### 2. Shared focus room
-
-Несколько пользователей:
-
-- запускают Pomodoro одновременно;
-- видят общий таймер.
-
-#### 3. Voice telemetry
-
-Сервер может:
-
-- логировать прогресс;
-- сохранять статистику;
-- анализировать usage.
-
----
-
 ## Git workflow
 
 Основная ветка:
@@ -422,10 +530,26 @@ main
 Новые фичи:
 
 ```text
+feature/<short-topic>
+```
+
+Примеры:
+
+```text
 feature/voice-worker
 feature/ws-sync
 feature/pwa
 ```
+
+---
+
+## Работа с git (необязательно)
+
+Пользовательские git-алиасы вынесены в [md-docs/user-md/USER_GIT_ALIASES.md](./md-docs/user-md/USER_GIT_ALIASES.md).
+
+Если файл существует и алиасы настроены, можно использовать сокращенные команды.
+
+Если файла нет или алиасы не настроены, использовать обычные команды `git`.
 
 ---
 
@@ -437,6 +561,26 @@ fix: repair voice deadlock
 refactor: split trainer logic
 perf: move timers to worker
 ```
+
+---
+
+## Definition of Done (для каждого PR)
+
+- приложение запускается оффлайн после первого install;
+- blind-navigation работает по заданным клавишам;
+- сценарий `voice unavailable` не ломает тренировки;
+- таймеры корректно `pause/resume/cleanup`, без висящих loop-ов;
+- storage-состояние валидируется и мигрируется;
+- нет вставки пользовательского ввода через `innerHTML`.
+
+### Минимальный ручной smoke-checklist
+
+- iPhone Safari: старт, голос, next-step, timer skip;
+- Android Chrome: те же сценарии;
+- Desktop Chrome: те же сценарии + background tab behavior;
+- negative test: принудительный `utterance.onerror`;
+- negative test: worker restart path;
+- negative test: localStorage quota path.
 
 ---
 
@@ -489,14 +633,6 @@ modular offline-first focus app
 
 ## Philosophy
 
-Это не ещё один todo-app.
+Это cognitive tool и focus ritual engine, а не витринный UI-проект.
 
-Это:
-
-- cognitive tool;
-- focus ritual engine;
-- offline nervous-system interface.
-
-Поэтому UX важнее визуальных эффектов.
-
-Скорость и надёжность важнее красоты.
+Скорость, надежность и предсказуемый UX выше косметики.
